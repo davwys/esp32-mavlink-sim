@@ -7,7 +7,10 @@
 // Send MAVLink heartbeat
 void command_heartbeat(uint8_t system_id, uint8_t component_id, uint8_t system_type, uint8_t autopilot_type, uint8_t system_mode, uint32_t custom_mode, uint8_t system_state);
 
-//Send battery status
+// Send parameters
+void command_parameters(int8_t system_id, uint8_t component_id);
+
+// Send battery status
 void command_status(uint8_t system_id, uint8_t component_id, float battery_remaining, float voltage_battery, float current_battery);
 
 // Send GPS and altitude data

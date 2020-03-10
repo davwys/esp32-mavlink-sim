@@ -31,6 +31,32 @@ void command_heartbeat(uint8_t system_id, uint8_t component_id, uint8_t system_t
   }
 }
 
+/************************************************************
+* @brief Sends a MAVLink parameter message, needed for the system to be recognized automatically in Mission Planner/QGroundcontrol
+* @param Basic UAV parameters, as defined above
+* @return void
+*************************************************************/
+
+void command_parameters(int8_t system_id, uint8_t component_id) {
+
+  // Initialize the required buffers
+  mavlink_message_t msg;
+  uint8_t buf[MAVLINK_MAX_PACKET_LEN];
+
+  // Pack the message
+  mavlink_msg_param_value_pack(system_id, component_id, &msg, "RC_SPEED", 50, 1, 1, 0);
+  // Copy the message to the send buffer
+  uint16_t len = mavlink_msg_to_send_buffer(buf, &msg);
+
+  // Send the message
+  Serial.write(buf, len);
+
+  // Send via Bluetooth (if enabled)
+  if(bluetooth_enabled){
+    BTSerial.write(buf, len);
+  }
+}
+
 
 /************************************************************
 * @brief Send some system data parameters (battery, etc)

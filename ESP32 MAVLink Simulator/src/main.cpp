@@ -40,6 +40,9 @@ void loop() {
   // Send MAVLink heartbeat
   command_heartbeat(system_id, component_id, system_type, autopilot_type, system_mode, custom_mode, system_state);
 
+  // Send parameters (needed for detection by some GCS software)
+  command_parameters(system_id, component_id);
+
   //Send battery status
   command_status(system_id, component_id, battery_remaining, voltage_battery, current_battery);
 
