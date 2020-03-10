@@ -16,6 +16,8 @@ Note that the program does **NOT** convert any telemetry protocol or provide a d
 
 Using Platformio, flash the program to your ESP32. You might need to change the settings in the platformio.ini file to suit the board you're using and choose the correct COM port. I used a Lolin D32 Pro board, but others should work as well.
 
+You will need the MAVLink library, provided in .zip format here or downloadable directly in Platformio.
+
 The ESP32 will then provide telemetry data through its USB port, as well as via Bluetooth. The default baud rate for both is set to 57600 and can be changed from the main.cpp file. To disable Bluetooth, change bluetooth_enabled to false in settings.cpp.
 
 Since the ESP32 offers more performance than an Arduino, the telemetry rate (hz) can be increased to up to 40hz. However, if you're doing additional processing (e.g. conversion of incoming data), I'd recommend leaving it at the default 10hz.
