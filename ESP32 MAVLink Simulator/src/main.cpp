@@ -11,11 +11,18 @@
 #include <commands.h>
 #include <input.h>
 
-// Default: 57600 baud, can be set higher if needed
+// Serial Baud rate
+//Default: 57600 baud
 #define BAUD_RATE 57600
+
+// Telemetry message rate in Hz
+//Default: 10hz
+//Maximum: 40hz (depending on what additional processing is being done)
+#define TELEMETRY_HZ 10
 
 
 BluetoothSerial BTSerial;
+uint16_t wait = 1000/TELEMETRY_HZ;
 
 
 void setup() {
@@ -27,7 +34,7 @@ void setup() {
 
 
 
-//Main loop: Send generated MAVLink data via serial output
+//Main loop: Send generated MAVLink data via USB (and bluetooth, if enabled)
 void loop() {
 
   // Send MAVLink heartbeat
@@ -45,6 +52,6 @@ void loop() {
   // Send attitude data to artificial horizon
   command_attitude(system_id, component_id, upTime, roll, pitch, yaw);
 
-  //Delay: send messages at about 10Hz
-  delay(100);
+  //Delay: send messages at set rate
+  delay(wait);
 }
