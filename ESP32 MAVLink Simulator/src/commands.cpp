@@ -1,7 +1,9 @@
 #include <Arduino.h>
 #include <ASLUAV/mavlink.h>
+#include <BluetoothSerial.h>
 
 #include <commands.h>
+#include <settings.h>
 /************************************************************
 * @brief Sends a MAVLink heartbeat message, needed for the system to be recognized
 * @param Basic UAV parameters, as defined above
@@ -22,6 +24,11 @@ void command_heartbeat(uint8_t system_id, uint8_t component_id, uint8_t system_t
 
   // Send the message
   Serial.write(buf, len);
+
+  // Send via Bluetooth (if enabled)
+  if(bluetooth_enabled){
+    BTSerial.write(buf, len);
+  }
 }
 
 
@@ -45,6 +52,11 @@ void command_status(uint8_t system_id, uint8_t component_id, float battery_remai
 
   // Send the message (.write sends as bytes)
   Serial.write(buf, len);
+
+  // Send via Bluetooth (if enabled)
+  if(bluetooth_enabled){
+    BTSerial.write(buf, len);
+  }
 }
 
 /************************************************************
@@ -71,6 +83,11 @@ void command_globalgps(int8_t system_id, int8_t component_id, int32_t upTime, fl
   uint16_t len = mavlink_msg_to_send_buffer(buf, &msg);
   // Send the message (.write sends as bytes)
   Serial.write(buf, len);
+
+  // Send via Bluetooth (if enabled)
+  if(bluetooth_enabled){
+    BTSerial.write(buf, len);
+  }
 }
 
 
@@ -97,6 +114,11 @@ void command_gps(int8_t system_id, int8_t component_id, int32_t upTime, int8_t f
 
   // Send the message (.write sends as bytes)
   Serial.write(buf, len);
+
+  // Send via Bluetooth (if enabled)
+  if(bluetooth_enabled){
+    BTSerial.write(buf, len);
+  }
 }
 
 /************************************************************
@@ -119,6 +141,11 @@ void command_hud(int8_t system_id, int8_t component_id, float airspeed, float gr
 
   // Send the message (.write sends as bytes)
   Serial.write(buf, len);
+
+  // Send via Bluetooth (if enabled)
+  if(bluetooth_enabled){
+    BTSerial.write(buf, len);
+  }
 }
 
 /************************************************************
@@ -143,4 +170,9 @@ void command_attitude(int8_t system_id, int8_t component_id, int32_t upTime, flo
   uint16_t len = mavlink_msg_to_send_buffer(buf, &msg);
   // Send the message (.write sends as bytes)
   Serial.write(buf, len);
+
+  // Send via Bluetooth (if enabled)
+  if(bluetooth_enabled){
+    BTSerial.write(buf, len);
+  }
 }

@@ -6,16 +6,23 @@
 
 #include <ASLUAV/mavlink.h>
 #include <Arduino.h>
+#include <BluetoothSerial.h>
 
 #include <commands.h>
 #include <input.h>
 
+// Default: 57600 baud, can be set higher if needed
+#define BAUD_RATE 57600
+
+
+BluetoothSerial BTSerial;
 
 
 void setup() {
-
-   // Enable serial output. Default: 57600 baud, can be set higher if needed
-   Serial.begin(57600);
+   // Enable serial output.
+   Serial.begin(BAUD_RATE);
+   // Enable bluetooth serial output
+   BTSerial.begin("MAVLink");
 }
 
 
