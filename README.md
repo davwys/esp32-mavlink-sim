@@ -23,7 +23,6 @@ The ESP32 will then provide telemetry data through its USB port, as well as via 
 Since the ESP32 offers more performance than an Arduino, the telemetry rate (hz) can be increased to up to 40hz. However, if you're doing additional processing (e.g. conversion of incoming data), I'd recommend leaving it at the default 10hz.
 
 From your groundstation application, simply choose the appropriate COM port, set baud rate to 57600 and hit "connect".
-If you are using Mission Planner, you might have to skip parameter fetching, as the program currently does not output any parameter data.
 
 ## Currently supported applications
 
@@ -31,7 +30,7 @@ The following groundstation applications have been tested and are known to be wo
 
 - [x] Mission Planner (Windows)
 - [x] APM Planner 2.0 (macOS/Windows)
-- [ ] QGroundcontrol (macOS/Windows) -> coming soon
+- [ ] QGroundcontrol (macOS/Windows) -> in progress
 
 ## Known issues
 
